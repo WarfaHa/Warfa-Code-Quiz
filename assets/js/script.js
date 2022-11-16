@@ -104,6 +104,49 @@ function getQuestion() {
     }
   }
 
+  //   Asks the user to pick an answer from multiple choice quiz
+  function pickAnswer(event) {
+    var buttonEl = event.target;
+  
+    // if the user picks nothing, do nothing and make user pick again.
+    if (!buttonEl.matches('.choice')) {
+      return;
+    }
+  
+    // If the user picks incorrectly, then it subtracts time
+    if (buttonEl.value !== quizQuestions[questionIndex].correctAnswer) {
+
+      time -= 15;
+  
+      if (time < 0) {
+        time = 0;
+      }
+  
+      // updates and displays time
+      timerEl.textContent = time;
+  
+    //   displays reponses to answers as Correct or Wrong
+      responseEl.textContent = 'Wrong!';
+    } else {
+
+      responseEl.textContent = 'Correct!';
+    }
+  
+    responseEl.setAttribute('class', 'response');
+    setTimeout(function () {
+      responseEl.setAttribute('class', 'response hide');
+    }, 1000);
+  
+    questionIndex++;
+  
+    // continues quiz until gameOver
+    if (time <= 0 || questionIndex === quizQuestions.length) {
+      gameOver();
+    } else {
+      getQuestion();
+    }
+  }
+
 // this function counts down the time
   function countdown() {
     
@@ -111,9 +154,12 @@ function getQuestion() {
     timerEl.textContent = time;
   
     if (time <= 0) {
-      quizEnd();
+      gameOver();
     }
   }
 
 // event listener for start quiz button
 startBtn.onclick = startQuiz;
+
+// user clicks on element containing choices
+choicesEl.onclick = pickAnswer;
