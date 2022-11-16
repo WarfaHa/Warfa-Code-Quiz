@@ -126,10 +126,10 @@ function askQuestion() {
       timerEl.textContent = time;
   
     //   displays reponses to answers as Correct or Wrong
-      responseEl.textContent = 'Wrong!';
+      responseEl.textContent = ('Wrong! ' + 'The correct answer is ' + quizQuestions[questionIndex].correctAnswer);
     } else {
 
-      responseEl.textContent = 'Correct!';
+      responseEl.textContent = ('Correct! ' + 'The answer is ' + quizQuestions[questionIndex].correctAnswer);
     }
   
     responseEl.setAttribute('class', 'response');
