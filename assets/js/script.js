@@ -75,7 +75,7 @@ function startQuiz() {
   questionsEl.removeAttribute('class');
 
   // starts the timer
-  timerId = setInterval(1000);
+  timerId = setInterval(countdown, 1000);
 
   // shows starting time
   timerEl.textContent = time;
@@ -108,4 +108,16 @@ function getQuestion() {
     }
   }
 
+  function countdown() {
+    // counts down the time
+    time--;
+    timerEl.textContent = time;
+  
+    // checks to see if time is up
+    if (time <= 0) {
+      quizEnd();
+    }
+  }
+
+  
 startBtn.onclick = startQuiz;
