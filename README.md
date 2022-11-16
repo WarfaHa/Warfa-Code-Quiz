@@ -14,7 +14,7 @@ This week, we had to build a timed coding quiz with multiple-choice questions. T
 
 ## Screenshot
 
-![Screenshot-of-Portfolio](/assets/GeneratorScreenshot.png)
+![Screenshot-of-Portfolio](/assets/ScreenshotQuiz.PNG)
 
 Deployed Site:
 
