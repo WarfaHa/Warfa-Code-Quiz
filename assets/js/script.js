@@ -75,7 +75,7 @@ function startQuiz() {
   questionsEl.removeAttribute('class');
 
   // starts the timer
-  timerId = setInterval(clockTick, 1000);
+  timerId = setInterval(1000);
 
   // shows starting time
   timerEl.textContent = time;
@@ -83,6 +83,29 @@ function startQuiz() {
   getQuestion();
 }
 function getQuestion() {
-}
+    // get current question object from array
+    var currentQuestion = quizQuestions[questionIndex];
+  
+    // update title with current question
+    var titleEl = document.getElementById('question-title');
+    titleEl.textContent = currentQuestion.question;
+  
+    // clear out any old question choices
+    choicesEl.innerHTML = '';
+  
+    // loop over choices
+    for (var i = 0; i < currentQuestion.answers.length; i++) {
+      // create new button for each choice
+      var choice = currentQuestion.answers[i];
+      var choiceNode = document.createElement('button');
+      choiceNode.setAttribute('class', 'choice');
+      choiceNode.setAttribute('value', choice);
+  
+      choiceNode.textContent = choice;
+  
+      // display on the page
+      choicesEl.appendChild(choiceNode);
+    }
+  }
 
 startBtn.onclick = startQuiz;
