@@ -79,11 +79,11 @@ function startQuiz() {
   timerEl.textContent = time;
 
 //   after the start screen is hidden it calls the questions function to load
-  getQuestion();
+  askQuestion();
 }
 
 // updates and displays new questions and multipleChoice answers
-function getQuestion() {
+function askQuestion() {
     var currentQuestion = quizQuestions[questionIndex];
   
     var titleEl = document.getElementById('question-title');
@@ -143,7 +143,7 @@ function getQuestion() {
     if (time <= 0 || questionIndex === quizQuestions.length) {
       gameOver();
     } else {
-      getQuestion();
+      askQuestion();
     }
   }
 
