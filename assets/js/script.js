@@ -6,7 +6,7 @@
 			'A: strings',
 			'B: booleans',
 			'C: alerts',
-            'D: numbers'
+      'D: numbers'
 		],
 		correctAnswer: 'C: alerts'
 	},
@@ -16,7 +16,7 @@
 			'A: quotes',
 			'B: curly brackets',
 			'C: parentheses',
-            'D: square brackets'
+      'D: square brackets'
 		],
 		correctAnswer: 'C: parentheses'
 	},
@@ -26,7 +26,7 @@
 			'A: numbers and strings',
 			'B: other arrays',
 			'C: booleans',
-            'D: all of the above'
+      'D: all of the above'
         ],
 		correctAnswer: 'D: all of the above'
 	},
@@ -36,7 +36,7 @@
 			'A: commas',
 			'B: curly brackets', 
 			'C: quotes',
-            'D: parentheses'
+      'D: parentheses'
         ],
 		correctAnswer: 'C: quotes'
 	},
@@ -46,7 +46,7 @@
 			'A: JavaScript', 
 			'B: terminal / bash', 
 			'C: for loops',
-            'D: console.log'
+      'D: console.log'
         ],
 		correctAnswer: 'D: console.log'
 	}
@@ -171,9 +171,26 @@ function askQuestion() {
   
     questionsEl.setAttribute('class', 'hide');
   }
-
+  
+  
 // event listener for start quiz button
-startBtn.onclick = startQuiz;
+startBtn.addEventListener("click", startQuiz);
+// event listener for each multiple choice
+choicesEl.addEventListener("click", pickAnswer);
+// event listener for submit button
+submitBtn.addEventListener("click", function() {
+  
+  
+  var renderInitials= initialsEl.value.trim()
+  
+  localStorage.setItem("highscores", JSON.stringify(renderInitials));
+  renderMessage();
+  
+  });
 
-// user clicks on element containing choices
-choicesEl.onclick = pickAnswer;
+  function renderMessage() {
+    var lastScore = JSON.parse(localStorage.getItem("highscores"));
+    if (lastScore !== null) {
+      document.querySelector(".message").textContent = "Previous attempt from " + lastScore + " had an highscore of " + time + "!"
+    }
+  }
