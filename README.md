@@ -17,7 +17,7 @@ This week, we had to build a timed coding quiz with multiple-choice questions. T
 ![Screenshot-of-Portfolio](/assets/ScreenshotQuiz.PNG)
 
 Deployed Site:
-
+https://warfaha.github.io/Warfa-Code-Quiz/
 
 ## Installation
 N/A 
