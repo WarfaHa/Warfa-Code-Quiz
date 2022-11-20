@@ -64,6 +64,7 @@ var submitBtn = document.getElementById('submit');
 var startBtn = document.getElementById('start');
 var initialsEl = document.getElementById('initials');
 var responseEl = document.getElementById('response');
+var endScreenEl = document.getElementById('end-screen');
 
 // Click the button to start the quiz
 function startQuiz() {
@@ -163,7 +164,7 @@ function askQuestion() {
     
     clearInterval(timerId);
   
-    var endScreenEl = document.getElementById('end-screen');
+    
     endScreenEl.removeAttribute('class');
   
     var finalScoreEl = document.getElementById('final-score');
@@ -179,18 +180,30 @@ startBtn.addEventListener("click", startQuiz);
 choicesEl.addEventListener("click", pickAnswer);
 // event listener for submit button
 submitBtn.addEventListener("click", function() {
-  
-  
+ 
+  var highscores= JSON.parse(window.localStorage.getItem("highscores")) || [];
   var renderInitials= initialsEl.value.trim()
-  
-  localStorage.setItem("highscores", JSON.stringify(renderInitials));
-  renderMessage();
-  
-  });
+  var highscore= time;
+  var newScore= {
+    score: highscore,
+    initials: renderInitials
+  }
 
+highscores.push(newScore);
+// Tutor helped with saving to local storage
+  localStorage.setItem("highscores", JSON.stringify(highscores));
+  endScreenEl.setAttribute('class', 'hide');
+  renderMessage();
+
+  });
+//tutor helped me getting local storage and creating new HTML element
   function renderMessage() {
-    var lastScore = JSON.parse(localStorage.getItem("highscores"));
-    if (lastScore !== null) {
-      document.querySelector(".message").textContent = "Previous attempt from " + lastScore + " had an highscore of " + time + "!"
-    }
+    var highscores= JSON.parse(window.localStorage.getItem("highscores")) || [];
+  for (let index = 0; index < highscores.length; index++) {
+    var ptag= document.createElement("p");
+    ptag.textContent= highscores[index].initials + " - " + highscores[index].score;
+    var highscoresEl = document.querySelector("#highscores");
+    highscoresEl.appendChild(ptag);
+  }
+
   }
